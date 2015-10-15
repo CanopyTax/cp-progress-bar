@@ -2,13 +2,9 @@
 
 > CanopyTax progress bar consistent with the CanopyTax style guide.
 
-## Demo
-
-[Check it live!](http://kentmclean.github.io/cp-progress-bar)
-
 ## Install
 
-[Download as ZIP](https://github.com/kentmclean/cp-progress-bar/archive/master.zip).
+[Download as ZIP](https://github.com/CanopyTax/cp-progress-bar/archive/master.zip).
 
 ## Usage
 
