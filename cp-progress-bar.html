@@ -1,0 +1,127 @@
+<template id="cpProgressBar">
+	<style>
+		.table {
+			display: table;
+			width: 100%;
+		}
+
+		.row {
+			display: table-row;
+			width: 100%;
+		}
+
+		.cell {
+			display: table-cell;
+			padding: 2px;
+		}
+
+		.progress-container {
+			border-width: 1;
+			border-style: solid;
+			border-color: #F2F2F2;
+			border-radius: 2px;
+			height: 20px;
+			line-height: 20px;
+			background-color: #F2F2F2;
+		}
+
+		.progress-bar {
+			position: relative;
+			margin-left: 0;
+			padding-left: 0;
+			border-width: 1;
+			border-style: solid;
+			border-radius: 2px;
+			height: 18px;
+			line-height: 18px;
+			width: 0;
+		}
+
+		.min-label {
+			width: 50%;
+			font-family: OpenSans;
+			font-size: 12px;
+			color: #AFAFAF;
+			line-height: 17px;
+		}
+
+		.max-label {
+			width: 50%;
+			font-family: OpenSans;
+			font-size: 12px;
+			color: #AFAFAF;
+			line-height: 17px;
+			text-align: right;
+		}
+	</style>
+
+	<div class="table">
+		<div class="row">
+			<div id="minLabel" class="cell min-label"></div>
+			<div id="maxLabel" class="cell max-label"></div>
+		</div>
+	</div>
+	<div id="progressContainer" class="progress-container">
+		<div id="progressBar" class="progress-bar">&nbsp;</div>
+	</div>
+</template>
+
+<script>
+	var importDoc = (document._currentScript || document.currentScript).ownerDocument;
+	var objectPrototype = Object.create(HTMLElement.prototype);
+
+	Object.defineProperty(objectPrototype, 'min-label', {
+		writable: true
+	});
+
+	Object.defineProperty(objectPrototype, 'max-label', {
+		writable: true
+	});
+
+	Object.defineProperty(objectPrototype, 'progress-percent', {
+		writable: true,
+		value: 0
+	});
+
+	Object.defineProperty(objectPrototype, 'progress-bar-color', {
+		writable: true
+	});
+
+	Object.defineProperty(objectPrototype, 'progress-bar-border-color', {
+		writable: true
+	});
+
+	objectPrototype.createdCallback = function() {
+		var shadow = this.createShadowRoot();
+		var template = importDoc.querySelector('#cpProgressBar');
+
+		shadow.appendChild(template.content.cloneNode(true));
+
+		this.minLabel = shadow.querySelector('#minLabel');
+		this.maxLabel = shadow.querySelector('#maxLabel');
+		this.progressContainer = shadow.querySelector('#progressContainer');
+		this.progressBar = shadow.querySelector('#progressBar');
+
+		this.minLabel.textContent = this.getAttribute('min-label') || "0%";
+		this.maxLabel.textContent = this.getAttribute('max-label') || "100%";
+		this.setProgress(this.getAttribute('progress-percent') || 0);
+		this.progressBar.style.backgroundColor = (this.getAttribute('progress-bar-color') || "#67BB6A");
+		this.progressBar.style.borderColor = (this.getAttribute('progress-bar-border-color') || this.progressBar.style.backgroundColor);
+	};
+
+	objectPrototype.attributeChangedCallback = function(attributeName, oldVal, newValue) {
+		if (attributeName == "progress-percent") {
+			this.setProgress(newValue);
+		}
+	}
+
+	objectPrototype.setProgress = function(progressValue) {
+		if (progressValue >= 0 && progressValue <= 100) {
+			this.progressBar.style.width = progressValue + "%";
+		}
+	};
+
+	document.registerElement("cp-progress-bar", {
+		prototype: objectPrototype
+	});
+</script>

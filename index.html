@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script src="./webcomponents.min.js"></script>
+	<link rel="import" href="./cp-progress-bar.html">
+	<title>Demo: cp-progress-bar</title>
+</head>
+
+<body>
+
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div style="padding: 20px;">
+			<div style="width: 500px;">
+				<cp-progress-bar id="progressBar1" progress-percent="50" min-label="Jun 2" max-label="Sep 21"></cp-progress-bar>
+			</div>
+
+			<p>
+				&nbsp;<br />
+				Set the value of the progress bar above
+			</p>
+			<p>
+				<input type="range" min="0" max="100" onchange="JavaScript: document.getElementById('progressBar1').setAttribute('progress-percent', this.value);">
+			</p>
+		</div>
+		
+		<div style="padding: 20px;">
+			<div style="width: 500px;">
+				<cp-progress-bar id="progressBar2" progress-percent="50" min-label="Turtle" max-label="Hare"></cp-progress-bar>
+			</div>
+
+			<p>
+				&nbsp;<br />
+				Set the value of the progress bar above
+			</p>
+			<p>
+				<input type="range" min="0" max="100" onchange="JavaScript: document.getElementById('progressBar2').setAttribute('progress-percent', this.value);">
+			</p>
+		</div>
+
+		<div style="padding: 20px;">
+			<div style="width: 500px;">
+				<cp-progress-bar id="progressBar3" progress-percent="50" progress-bar-color="lightblue"></cp-progress-bar>
+			</div>
+
+			<p>
+				&nbsp;<br />
+				Set the value of the progress bar above
+			</p>
+			<p>
+				<input type="range" min="0" max="100" onchange="JavaScript: document.getElementById('progressBar3').setAttribute('progress-percent', this.value);">
+			</p>
+		</div>
+		
+		<div style="padding: 20px;">
+			<div style="width: 500px;">
+				<cp-progress-bar id="progressBar4" progress-percent="33"></cp-progress-bar>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
